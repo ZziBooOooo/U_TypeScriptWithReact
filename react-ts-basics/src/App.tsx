@@ -1,13 +1,41 @@
+import { useState } from "react";
+
 import CourseGoal from "./components/CourseGoal";
+import CourseGoalList from "./components/CourseGoalList";
+import Header from "./components/Header";
+import goalsImg from "./assets/goals.jpg"
+
+export type CourseGoal = {
+  title:string;
+  description : string;
+  id : number;
+}
 
 export default function App() {
+  const [goals, setGoals] = useState<CourseGoal[]>([]);
+
+  function handleAddGoal(){
+    setGoals((prevGoals)=>{
+      const newGoal : CourseGoal = {
+        id: Math.random(),
+        title: 'Learn React + TS ',
+        description : 'Learn it in depth!'
+      };
+      return [...prevGoals, newGoal];
+    });
+  }
+
+  function handleDeleteGoal(id: number){
+    setGoals(prevGoals=> prevGoals.filter((goal)=>goal.id !== id ));
+  }
+
   return (
     <main>
-      {/* CourseGoal에서 title, deescription 2개만 타입 지정을 해놨으므로 여기서
-      다른 프롭을 넘기려고 하면 오류가 발생한다. */}
-      <CourseGoal  title="Learn React + TS">
-        <p>Learn it from the ground up</p>
-      </CourseGoal>
+      <Header image={{src:goalsImg, alt:'A list of goals'}}>
+        <h1>Your Cours Goals</h1>
+      </Header>
+      <button onClick={handleAddGoal}>Add Goal</button>
+     <CourseGoalList goals={goals} />
     </main>
   );
 }

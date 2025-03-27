@@ -19,11 +19,7 @@ export default function CourseGoalList({
     <ul>
       {goals.map((goal) => (
         <li key={goal.id}>
-          <CourseGoal
-            title={goal.title}
-            onDeleteGoal={onDeleteGoal}
-            id={goal.id}
-          >
+          <CourseGoal title={goal.title} onDelete={onDeleteGoal} id={goal.id}>
             <p>{goal.description}</p>
           </CourseGoal>
         </li>

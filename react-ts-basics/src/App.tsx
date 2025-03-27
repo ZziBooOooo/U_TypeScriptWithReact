@@ -4,6 +4,7 @@ import CourseGoal from "./components/CourseGoal";
 import CourseGoalList from "./components/CourseGoalList";
 import Header from "./components/Header";
 import goalsImg from "./assets/goals.jpg";
+import NewGoal from "./components/NewGoal";
 
 export type CourseGoal = {
   title: string;
@@ -29,6 +30,7 @@ export default function App() {
     });
   }
 
+  // prop drilling이 발생하기 때문에 context나 redux를 사용해도 된다.
   function handleDeleteGoal(id: number) {
     setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
   }
@@ -38,7 +40,8 @@ export default function App() {
       <Header image={{ src: goalsImg, alt: "A list of goals" }}>
         <h1>Your Cours Goals</h1>
       </Header>
-      <button onClick={handleAddGoal}>Add Goal</button>
+      {/* <button onClick={handleAddGoal}>Add Goal</button> */}
+      <NewGoal></NewGoal>
       <CourseGoalList goals={goals} onDeleteGoal={handleDeleteGoal} />
     </main>
   );

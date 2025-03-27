@@ -30,11 +30,11 @@ export default function CourseGoal({ title, description }: CourseGoalProps) {
 type CourseGoalProps = PropsWithChildren<{
   title: string;
   id: number;
-  onDeleteGoal: (id: number) => void;
+  onDelete: (id: number) => void;
 }>;
 export default function CourseGoal({
   title,
-  onDeleteGoal,
+  onDelete,
   id,
   children,
 }: CourseGoalProps) {
@@ -45,7 +45,7 @@ export default function CourseGoal({
         <p>{id}</p>
         <p>{children}</p>
       </div>
-      <button onClick={() => onDeleteGoal(id)}>DELETE</button>
+      <button onClick={() => onDelete(id)}>DELETE</button>
     </article>
   );
 }

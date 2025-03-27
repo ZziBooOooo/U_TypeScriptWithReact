@@ -1,4 +1,4 @@
-import {type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 /* type CourseGoalProps = {
   title: string;
@@ -28,18 +28,24 @@ export default function CourseGoal({ title, description }: CourseGoalProps) {
 } */
 
 type CourseGoalProps = PropsWithChildren<{
-  title:string;
+  title: string;
+  id: number;
   onDeleteGoal: (id: number) => void;
-  }>;
-export default function CourseGoal({ title, onDeleteGoal, children }: CourseGoalProps) {
+}>;
+export default function CourseGoal({
+  title,
+  onDeleteGoal,
+  id,
+  children,
+}: CourseGoalProps) {
   return (
     <article>
       <div>
         <h2>{title}</h2>
+        <p>{id}</p>
         <p>{children}</p>
       </div>
-      {/* 클릭함수에 id가 없어서 현재 에러 표시하는 중 같음..? */}
-      <button onClick={onDeleteGoal}>DELETE</button>
+      <button onClick={() => onDeleteGoal(id)}>DELETE</button>
     </article>
   );
 }

@@ -1,12 +1,21 @@
 import React, { ReactNode } from "react";
 
-type InfoBoxProps = {
-  mode: "hint" | "warning";
-  severity?: "low" | "medium" | "high"; // optional 지정
+type HintBoxProps = {
+  mode: "hint";
   children: ReactNode;
 };
 
-const InfoBox = ({ mode, severity, children }: InfoBoxProps) => {
+type WarningBoxProps = {
+  mode: "warning";
+  severity: "low" | "medium" | "high";
+  children: ReactNode;
+};
+
+type InfoBoxProps = HintBoxProps | WarningBoxProps;
+
+const InfoBox = (props: InfoBoxProps) => {
+  const { children, mode } = props;
+
   // info, warning - 2version
   if (mode === "hint") {
     return (
@@ -16,6 +25,8 @@ const InfoBox = ({ mode, severity, children }: InfoBoxProps) => {
       </aside>
     );
   }
+
+  const { severity } = props;
 
   return (
     <aside className={`infobox infobox-warning warning--${severity}`}>

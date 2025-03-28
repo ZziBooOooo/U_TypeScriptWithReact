@@ -19,12 +19,12 @@ export default function App() {
   // 왜 타입을 지정하지 않았나?
   // setGoals는 goals의 상태를 업데이트 하는 함수
   // TS가 코드 흐름을 보고 자동으로 타입추론을 함
-  function handleAddGoal() {
+  function handleAddGoal(goal: string, summary: string) {
     setGoals((prevGoals) => {
       const newGoal: CourseGoal = {
-        id: Number((Math.random() * 10).toFixed(2)),
-        title: "Learn React + TS ",
-        description: "Learn it in depth!!",
+        id: Number((Math.random() * 10).toFixed(1)),
+        title: goal,
+        description: summary,
       };
       return [...prevGoals, newGoal];
     });
@@ -41,7 +41,7 @@ export default function App() {
         <h1>Your Cours Goals</h1>
       </Header>
       {/* <button onClick={handleAddGoal}>Add Goal</button> */}
-      <NewGoal></NewGoal>
+      <NewGoal onAddGoal={handleAddGoal}></NewGoal>
       <CourseGoalList goals={goals} onDeleteGoal={handleDeleteGoal} />
     </main>
   );

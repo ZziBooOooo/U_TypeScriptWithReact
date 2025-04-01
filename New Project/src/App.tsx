@@ -7,12 +7,10 @@ function App() {
       {/* <Input id="name" label="Your name" type="text"></Input>
       <Input id="age" label="Your age" type="number"></Input> */}
       <p>
-        <Button el="button">A Button</Button>
+        <Button>A Button</Button>
       </p>
       <p>
-        <Button el="anchor" href="https://www.google.co.kr/?hl=ko">
-          A Link
-        </Button>
+        <Button href="https://www.google.co.kr/?hl=ko">A Link</Button>
       </p>
     </main>
   );

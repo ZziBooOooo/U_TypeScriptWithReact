@@ -7,6 +7,11 @@ import { useRef, useEffect } from "react";
 function App() {
   // const inputRef = useRef<HTMLInputElement>(null);
 
+  function handleSave(data: unknown) {
+    const extractedData = data as { name: string; age: string };
+    console.log(extractedData);
+  }
+
   return (
     <main>
       {/*       <Input id="name" label="Your name" type="text" ref={inputRef}></Input>
@@ -18,7 +23,7 @@ function App() {
         <Button href="https://www.google.co.kr/?hl=ko">A Link</Button>
       </p> */}
       {/* <Container as={Button}>Click me</Container> */}
-      <Form>
+      <Form onSave={handleSave}>
         <Input type="text" label="Name" id="name"></Input>
         <Input type="number" label="Age" id="age"></Input>
         <p>

@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, type ReactNode } from "react";
 
 // 타이머는 개별
-type Timer = {
+export type Timer = {
   name: string;
   duration: number;
 };

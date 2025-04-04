@@ -1,12 +1,17 @@
 import Container from "./UI/Container.tsx";
 import { Timer as TimerProps } from "../store/timers-context.tsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Timer({ name, duration }: TimerProps) {
+  const interval = useRef<number | null>(null);
   const [remainingTime, setRemaningTime] = useState(duration * 1000);
 
+  if (remainingTime <= 0 && interval.current) {
+    clearInterval(interval.current);
+  }
+
   useEffect(() => {
-    setInterval(function () {
+    interval.current = setInterval(function () {
       setRemaningTime((prevTime) => prevTime - 50);
     }, 50);
   }, []);
@@ -19,7 +24,7 @@ export default function Timer({ name, duration }: TimerProps) {
       <p>
         <progress max={duration * 1000} value={remainingTime} />
       </p>
-      <p>{}</p>
+      <p>{formattedRemainingTime}</p>
     </Container>
   );
 }

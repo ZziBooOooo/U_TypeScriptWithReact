@@ -11,9 +11,11 @@ export default function Timer({ name, duration }: TimerProps) {
   }
 
   useEffect(() => {
-    interval.current = setInterval(function () {
+    const timer = setInterval(function () {
       setRemaningTime((prevTime) => prevTime - 50);
     }, 50);
+    interval.current = timer;
+    return () => clearInterval(timer);
   }, []);
 
   const formattedRemainingTime = (remainingTime / 1000).toFixed(2);

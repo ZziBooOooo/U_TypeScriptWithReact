@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Timer({ name, duration }: TimerProps) {
   const interval = useRef<number | null>(null);
-  const [remainingTime, setRemaningTime] = useState(duration * 1000);
+  const [remainingTime, setRemainingTime] = useState(duration * 1000);
   const { isRunning } = userTimersContext();
 
   if (remainingTime <= 0 && interval.current) {
@@ -19,7 +19,12 @@ export default function Timer({ name, duration }: TimerProps) {
 
     if (isRunning) {
       timer = setInterval(function () {
-        setRemaningTime((prevTime) => prevTime - 50);
+        setRemainingTime((prevTime) => {
+          if (prevTime <= 0) {
+            return prevTime;
+          }
+          return prevTime - 50;
+        });
       }, 50);
       interval.current = timer;
     } else if (!isRunning && interval.current) {

@@ -5,10 +5,12 @@ import Button from "../UI/Button.tsx";
 import Input from "../UI/Input.tsx";
 import { useCustomDispatch } from "../../store/hooks.ts";
 import { addSession } from "../../store/session-slice.ts";
+import { Session } from "../../store/session-slice.ts";
 
 type setStartBookSessionProps = {
   setStartBookSession: React.Dispatch<React.SetStateAction<boolean>>;
   sessionId: string;
+  session: Session;
 };
 
 type handleFormType = (e: HTMLElement) => void;
@@ -16,6 +18,7 @@ type handleFormType = (e: HTMLElement) => void;
 const BookSession = ({
   setStartBookSession,
   sessionId,
+  session,
 }: setStartBookSessionProps) => {
   const FormModalRef = useRef<ModalHandle>(null);
   const dispatch = useCustomDispatch();
@@ -48,6 +51,9 @@ const BookSession = ({
         id: sessionId,
         name: data.name as string,
         email: data.email as string,
+        title: session.title,
+        summary: session.summary,
+        date: session.date,
       })
     );
 
@@ -57,7 +63,7 @@ const BookSession = ({
   return (
     <Modal ref={FormModalRef}>
       <form onSubmit={handleForm}>
-        <Input id="0" label="name" type="text" name="name"></Input>
+        <Input id="5" label="name" type="text" name="name"></Input>
         <Input id="1" label="email" type="email" name="email"></Input>
         <p className="actions">
           <Button textOnly={true} onClick={closeModal}>

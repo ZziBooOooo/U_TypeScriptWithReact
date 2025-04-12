@@ -1,9 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export type Session = {
+  id: string;
+  title: string;
+  summary: string;
+  description: string;
+  date: string;
+  image: string;
+  duration: number;
+};
+
 type BookItem = {
   id: string;
   name: string;
   email: string;
+  title: string;
+  summary: string;
+  date: string;
 };
 type BookState = {
   bookLists: BookItem[];
@@ -19,7 +32,14 @@ export const sessionSlice = createSlice({
   reducers: {
     addSession(
       state,
-      action: PayloadAction<{ id: string; name: string; email: string }>
+      action: PayloadAction<{
+        id: string;
+        name: string;
+        email: string;
+        title: string;
+        summary: string;
+        date: string;
+      }>
     ) {
       const itemIndex = state.bookLists.findIndex(
         (item) => item.id === action.payload.id

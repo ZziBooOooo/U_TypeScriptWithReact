@@ -20,7 +20,7 @@ export default function SessionPage() {
       </main>
     );
   }
-
+  console.log(loadedSession);
   return (
     <main id="session-page">
       <article>
@@ -49,6 +49,7 @@ export default function SessionPage() {
         <BookSession
           setStartBookSession={setStartBookSession}
           sessionId={sessionId!}
+          session={loadedSession}
         ></BookSession>
       )}
     </main>

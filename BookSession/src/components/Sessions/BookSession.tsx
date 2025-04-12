@@ -3,15 +3,22 @@ import Modal from "../UI/Modal.tsx";
 import { ModalHandle } from "../UI/Modal.tsx";
 import Button from "../UI/Button.tsx";
 import Input from "../UI/Input.tsx";
+import { useDispatch } from "react-redux";
+import { addSession } from "../../store/session-slice.ts";
 
 type setStartBookSessionProps = {
   setStartBookSession: React.Dispatch<React.SetStateAction<boolean>>;
+  sessionId: string;
 };
 
 type handleFormType = (e: HTMLElement) => void;
 
-const BookSession = ({ setStartBookSession }: setStartBookSessionProps) => {
+const BookSession = ({
+  setStartBookSession,
+  sessionId,
+}: setStartBookSessionProps) => {
   const FormModalRef = useRef<ModalHandle>(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     handleModal();
@@ -35,6 +42,16 @@ const BookSession = ({ setStartBookSession }: setStartBookSessionProps) => {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
     console.log(data);
+
+    dispatch(
+      addSession({
+        id: sessionId,
+        name: data.name as string,
+        email: data.email as string,
+      })
+    );
+
+    closeModal();
   }
 
   return (

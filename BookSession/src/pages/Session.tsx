@@ -46,7 +46,10 @@ export default function SessionPage() {
         <p id="content">{loadedSession.description}</p>
       </article>
       {startBookSession && (
-        <BookSession setStartBookSession={setStartBookSession}></BookSession>
+        <BookSession
+          setStartBookSession={setStartBookSession}
+          sessionId={sessionId!}
+        ></BookSession>
       )}
     </main>
   );

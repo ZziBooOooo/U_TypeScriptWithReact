@@ -3,7 +3,7 @@ import Modal from "../UI/Modal.tsx";
 import { ModalHandle } from "../UI/Modal.tsx";
 import Button from "../UI/Button.tsx";
 import Input from "../UI/Input.tsx";
-import { useDispatch } from "react-redux";
+import { useCustomDispatch } from "../../store/hooks.ts";
 import { addSession } from "../../store/session-slice.ts";
 
 type setStartBookSessionProps = {
@@ -18,7 +18,7 @@ const BookSession = ({
   sessionId,
 }: setStartBookSessionProps) => {
   const FormModalRef = useRef<ModalHandle>(null);
-  const dispatch = useDispatch();
+  const dispatch = useCustomDispatch();
 
   useEffect(() => {
     handleModal();

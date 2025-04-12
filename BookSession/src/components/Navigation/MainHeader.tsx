@@ -1,8 +1,16 @@
-import React from "react";
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../UI/Button";
+import Modal from "../UI/Modal";
+import { ModalHandle } from "../../pages/Session";
 
 const MainHeader = () => {
+  const HeaderModalRef = useRef<ModalHandle>(null);
+
+  function handleModal() {
+    HeaderModalRef.current?.open();
+  }
+
   return (
     <div id="main-header">
       <h1>ReactMentoring</h1>
@@ -26,10 +34,13 @@ const MainHeader = () => {
             </NavLink>
           </li>
           <li>
-            <Button>Upcoming Sessions</Button>
+            <Button onClick={handleModal}>Upcoming Sessions</Button>
           </li>
         </ul>
       </nav>
+      <Modal ref={HeaderModalRef}>
+        <p>session 리스트 넣을거임</p>
+      </Modal>
     </div>
   );
 };

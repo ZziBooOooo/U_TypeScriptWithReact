@@ -1,11 +1,14 @@
-import { useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import Modal from "../UI/Modal.tsx";
 import { ModalHandle } from "../UI/Modal.tsx";
 import Button from "../UI/Button.tsx";
+import Input from "../UI/Input.tsx";
 
 type setStartBookSessionProps = {
   setStartBookSession: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+type handleFormType = (e: HTMLElement) => void;
 
 const BookSession = ({ setStartBookSession }: setStartBookSessionProps) => {
   const FormModalRef = useRef<ModalHandle>(null);
@@ -26,15 +29,26 @@ const BookSession = ({ setStartBookSession }: setStartBookSessionProps) => {
     setStartBookSession(false);
   }
 
+  function handleForm(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+  }
+
   return (
     <Modal ref={FormModalRef}>
-      <form>
-        <input></input>
+      <form onSubmit={handleForm}>
+        <Input id="0" label="name" type="text" name="name"></Input>
+        <Input id="1" label="email" type="email" name="email"></Input>
+        <p className="actions">
+          <Button textOnly={true} onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button>Confirm</Button>
+        </p>
       </form>
-      <Button textOnly={true} onClick={closeModal}>
-        Close
-      </Button>
-      <Button>Confirm</Button>
     </Modal>
   );
 };

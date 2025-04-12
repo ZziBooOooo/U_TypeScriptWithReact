@@ -23,9 +23,6 @@ export default function SessionPage() {
 
   return (
     <main id="session-page">
-      {startBookSession && (
-        <BookSession setStartBookSession={setStartBookSession}></BookSession>
-      )}
       <article>
         <header>
           <img src={loadedSession.image} alt={loadedSession.title} />
@@ -48,6 +45,9 @@ export default function SessionPage() {
         </header>
         <p id="content">{loadedSession.description}</p>
       </article>
+      {startBookSession && (
+        <BookSession setStartBookSession={setStartBookSession}></BookSession>
+      )}
     </main>
   );
 }

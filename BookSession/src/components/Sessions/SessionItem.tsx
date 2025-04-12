@@ -1,5 +1,6 @@
 import React from "react";
 import { sessionType } from "./SessionsList";
+import Button from "../UI/Button";
 
 const SessionItem = ({ image, title, summary, id }: sessionType) => {
   return (
@@ -10,7 +11,11 @@ const SessionItem = ({ image, title, summary, id }: sessionType) => {
           <h3>{title}</h3>
           <p>{summary}</p>
         </div>
-        <p className="actions"></p>
+        <p className="actions">
+          <Button textOnly={true} to={`/sessions/${id}`}>
+            More
+          </Button>
+        </p>
       </div>
     </div>
   );

@@ -1,15 +1,11 @@
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../UI/Button";
-import Modal from "../UI/Modal";
-import { ModalHandle } from "../../pages/Session";
+import { useState } from "react";
+import UpcomingSession from "../Sessions/UpcomingSession";
 
 const MainHeader = () => {
-  const HeaderModalRef = useRef<ModalHandle>(null);
-
-  function handleModal() {
-    HeaderModalRef.current?.open();
-  }
+  const [startHeaderModal, setStartHeaderModal] = useState<boolean>(false);
 
   return (
     <div id="main-header">
@@ -34,13 +30,17 @@ const MainHeader = () => {
             </NavLink>
           </li>
           <li>
-            <Button onClick={handleModal}>Upcoming Sessions</Button>
+            <Button onClick={() => setStartHeaderModal(true)}>
+              Upcoming Sessions
+            </Button>
           </li>
         </ul>
       </nav>
-      <Modal ref={HeaderModalRef}>
-        <p>session 리스트 넣을거임</p>
-      </Modal>
+      {startHeaderModal && (
+        <UpcomingSession
+          setStartHeaderModal={setStartHeaderModal}
+        ></UpcomingSession>
+      )}
     </div>
   );
 };

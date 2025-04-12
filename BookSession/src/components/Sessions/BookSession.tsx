@@ -3,7 +3,11 @@ import Modal from "../UI/Modal.tsx";
 import { ModalHandle } from "../UI/Modal.tsx";
 import Button from "../UI/Button.tsx";
 
-const BookSession = () => {
+type setStartBookSessionProps = {
+  setStartBookSession: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const BookSession = ({ setStartBookSession }: setStartBookSessionProps) => {
   const FormModalRef = useRef<ModalHandle>(null);
 
   useEffect(() => {
@@ -19,10 +23,11 @@ const BookSession = () => {
 
   function closeModal() {
     FormModalRef.current?.close();
+    setStartBookSession(false);
   }
 
   return (
-    <Modal ref={FormModalRef} onClose={closeModal}>
+    <Modal ref={FormModalRef}>
       <form>
         <input></input>
       </form>

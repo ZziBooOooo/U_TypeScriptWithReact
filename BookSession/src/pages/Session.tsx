@@ -23,7 +23,9 @@ export default function SessionPage() {
 
   return (
     <main id="session-page">
-      {startBookSession && <BookSession></BookSession>}
+      {startBookSession && (
+        <BookSession setStartBookSession={setStartBookSession}></BookSession>
+      )}
       <article>
         <header>
           <img src={loadedSession.image} alt={loadedSession.title} />

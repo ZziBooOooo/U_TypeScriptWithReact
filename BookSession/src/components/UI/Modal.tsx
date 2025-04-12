@@ -14,32 +14,29 @@ export type ModalHandle = {
 
 type ModalProps = {
   children: ReactNode;
-  onClose: () => void;
 };
 
-const Modal = forwardRef<ModalHandle, ModalProps>(
-  ({ children, onClose }, ref) => {
-    const modalRef = useRef<HTMLDialogElement>(null);
+const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
+  const modalRef = useRef<HTMLDialogElement>(null);
 
-    useImperativeHandle(ref, () => {
-      return {
-        open() {
-          modalRef.current?.showModal();
-        },
+  useImperativeHandle(ref, () => {
+    return {
+      open() {
+        modalRef.current?.showModal();
+      },
 
-        close() {
-          modalRef.current?.close();
-        },
-      };
-    });
+      close() {
+        modalRef.current?.close();
+      },
+    };
+  });
 
-    return createPortal(
-      <dialog className="modal" ref={modalRef} onClose={onClose}>
-        {children}
-      </dialog>,
-      document.getElementById("modal-root")!
-    );
-  }
-);
+  return createPortal(
+    <dialog className="modal" ref={modalRef}>
+      {children}
+    </dialog>,
+    document.getElementById("modal-root")!
+  );
+});
 
 export default Modal;
